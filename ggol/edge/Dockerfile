@@ -1,5 +1,8 @@
-FROM openjdk:13
+FROM gcr.io/distroless/java:11
 
-COPY target/edge-1.0-SNAPSHOT.jar /usr/src/edge/edge.jar
-WORKDIR /usr/src/edge
-CMD ["java", "-jar", "edge.jar"]
+EXPOSE 8080
+
+COPY /target/edge-*.jar /app/edge.jar
+WORKDIR /app
+
+CMD ["edge.jar"]
