@@ -21,9 +21,8 @@ commonLabels:
 # YAML string, with resources separated by document
 # markers ("---").
 resources:
-- bases/backend/chunk.yaml
 - bases/backend/deployment.yaml
 - bases/backend/service.yaml
 
 images:
-  - name: chunk
+  - name: tsmarsh/chunk

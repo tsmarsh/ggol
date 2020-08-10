@@ -16,12 +16,10 @@ spec:
         run: worldchunk
     spec:
       containers:
-        - name: chunk
-          image: chunk
-          imagePullPolicy: Always
-      restartPolicy: Always
-      terminationGracePeriodSeconds: 30
-      dnsPolicy: ClusterFirst
-      securityContext: {}
+      - image: tsmarsh/chunk
+        name: worldchunk
+        ports:
+        - containerPort: 8080
+
 
 

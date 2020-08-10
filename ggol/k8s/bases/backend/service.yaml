@@ -5,8 +5,11 @@ metadata:
   labels:
     run: worldchunk
 spec:
+  type: NodePort
+  selector:
+    run: worldchunk
   ports:
   - port: 8080
     protocol: TCP
-  selector:
-    app: worldchunk
+    name: http
+    nodePort: 30001
