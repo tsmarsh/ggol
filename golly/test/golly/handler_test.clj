@@ -25,6 +25,14 @@
       (let [response (app (mock/request :get "/"))]
         (is (= (:body response) (str #{[0 0] [0 1]}))))))
 
+  (testing "killing cells"
+    (do
+      (reset! golly.handler/world #{})
+      (app (mock/request :put "/0/0"))
+      (app (mock/request :delete "/0/0"))
+      (let [response (app (mock/request :get "/"))]
+        (is (= (:body response) (str #{}))))))
+
   (testing "testing next"
     (do
       (reset! golly.handler/world #{})
