@@ -2,7 +2,7 @@
   :description "FIXME: write description"
   :url "http://example.com/FIXME"
   :min-lein-version "2.0.0"
-  :dependencies [[org.clojure/clojure "1.10.0"]
+  :dependencies [[org.clojure/clojure "1.9.0  "]
                  [compojure "1.6.1"]
                  [ring/ring-defaults "0.3.2"]
                  [ring/ring-jetty-adapter "1.6.3"]
@@ -11,15 +11,14 @@
             [lein-cloverage "1.1.2"]
             [io.taylorwood/lein-native-image "0.3.1"]]
 
-  :native-image {:graal-bin "/Library/Java/JavaVirtualMachines/graalvm-ce-java11-20.1.0/Contents/Home/bin/"
-                 :jvm-opts  ["-Dclojure.compiler.direct-linking=true"]
+  :native-image {:jvm-opts  ["-Dclojure.compiler.direct-linking=true"]
                  :opts      ["-H:EnableURLProtocols=http"
                              "--report-unsupported-elements-at-runtime" ;; ignore native-image build errors
                              "--initialize-at-build-time"
-                             "--no-server"                  ;; TODO issue with subsequent builds failing on same server
+                             "--no-server"
                              "--verbose"
                              "--no-fallback"]
-                 :name      "server"}
+                 :name      "golly"}
 
   :ring {:handler golly.handler/app}
   :main golly.core
