@@ -1,0 +1,25 @@
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: worldchunk
+  labels:
+    run: worldchunk
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      run: worldchunk
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        run: worldchunk
+    spec:
+      containers:
+      - image: tsmarsh/chunk
+        name: worldchunk
+        ports:
+        - containerPort: 8080
+
+
+
