@@ -21,7 +21,7 @@
              (is (empty? bs))
              (is (contains? ss 2))
              (is (contains? ss 3))))
-         
+
          (testing "parsing the rules"
            (let [[bs ss] (parse-rules "B3/S")]
              (is (contains? bs 3))

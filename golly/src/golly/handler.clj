@@ -3,8 +3,8 @@
     [golly.gol :refer :all]
     [golly.parsers :refer :all]
     [compojure.core :refer :all]
-            [compojure.route :as route]
-            [ring.middleware.defaults :refer [wrap-defaults site-defaults]]))
+    [compojure.route :as route]
+    [ring.middleware.defaults :refer [wrap-defaults site-defaults]]))
 
 (def history (atom []))
 (def world (atom #{}))
@@ -26,3 +26,5 @@
 
 (def app
   (wrap-defaults app-routes (update-in site-defaults [:security :anti-forgery] not)))
+
+
