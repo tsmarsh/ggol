@@ -1,9 +1,27 @@
-FROM gcr.io/distroless/java:11
+FROM oracle/graalvm-ce:latest
 
-ENV GOLLY_PORT 3000
-EXPOSE 3000
+RUN gu install native-image
+RUN yum install -y curl
 
-COPY /target/golly-0.1.0-SNAPSHOT-standalone.jar /app/golly.jar
-WORKDIR /app
+RUN curl https://raw.githubusercontent.com/technomancy/leiningen/stable/bin/lein > /usr/local/bin/lein
 
-CMD ["golly.jar"]
+RUN chmod +x /usr/local/bin/lein
+
+COPY build/profiles.clj .lein/profiles.clj
+
+COPY src /golly/src
+COPY resources /golly/resources
+COPY test /golly/test
+COPY project.clj /golly/project.clj
+
+WORKDIR /golly
+RUN lein deps
+RUN lein test
+RUN lein native-image
+
+#FROM scratch
+#ENV GOLLY_PORT 3000
+#EXPOSE 3000
+#
+#COPY --from=build /golly/target/gooly /bin/golly
+#ENTRYPOINT ["/bin/golly"]
