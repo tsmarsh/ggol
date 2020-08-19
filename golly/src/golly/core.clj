@@ -1,9 +1,8 @@
 (ns golly.core
   (:require [ring.adapter.jetty :refer [run-jetty]]
-            [golly.handler :refer [app]]
-            [environ.core :refer [env]])
+            [golly.handler :refer [app]])
   (:gen-class))
 
 (defn -main [& args]
-  (run-jetty app {:port  (Integer/parseInt (env :golly-port))
+  (run-jetty app {:port  3000
                   :join? false}))
