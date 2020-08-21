@@ -10,7 +10,7 @@ spec:
       paths:
       - path: /0/0/*
         backend:
-          serviceName: edge
+          serviceName: worldedge
           servicePort: 4000
 #      - path: /[0|2]/1/*
 #        backend:
@@ -18,5 +18,5 @@ spec:
 #          servicePort: 80
       - path: /1/1/*
         backend:
-          serviceName: chunck
+          serviceName: worldchunk
           servicePort: 3000

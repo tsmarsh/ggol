@@ -7,7 +7,7 @@
   (testing "main route"
     (do
       (reset! golly.handler/world #{})
-      (let [response (app (mock/request :get "/"))]
+      (let [response (app (mock/request :get "/0/0"))]
         (is (= (:status response) 200))
         (is (= (:body response) (str #{}))))))
 
@@ -20,28 +20,28 @@
   (testing "birthing cells"
     (do
       (reset! golly.handler/world #{})
-      (app (mock/request :put "/0/0"))
-      (app (mock/request :put "/0/1"))
-      (let [response (app (mock/request :get "/"))]
+      (app (mock/request :put "/0/0/0/0"))
+      (app (mock/request :put "/0/0/0/1"))
+      (let [response (app (mock/request :get "/0/0"))]
         (is (= (:body response) (str #{[0 0] [0 1]}))))))
 
   (testing "killing cells"
     (do
       (reset! golly.handler/world #{})
-      (app (mock/request :put "/0/0"))
-      (app (mock/request :delete "/0/0"))
-      (let [response (app (mock/request :get "/"))]
+      (app (mock/request :put "/0/0/0/0"))
+      (app (mock/request :delete "/0/0/0/0"))
+      (let [response (app (mock/request :get "/0/0"))]
         (is (= (:body response) (str #{}))))))
 
   (testing "testing next"
     (do
       (reset! golly.handler/world #{})
-      (app (mock/request :put "/0/0"))
-      (app (mock/request :put "/0/1"))
-      (app (mock/request :put "/0/2"))
-      (let [response (app (mock/request :get "/next"))
-            response2 (app (mock/request :get "/"))
-            response3 (app (mock/request :get "/0"))]
+      (app (mock/request :put "/0/0/0/0"))
+      (app (mock/request :put "/0/0/0/1"))
+      (app (mock/request :put "/0/0/0/2"))
+      (let [response (app (mock/request :get "/0/0/next"))
+            response2 (app (mock/request :get "/0/0"))
+            response3 (app (mock/request :get "/0/0/0"))]
         (is (= (:body response) (str #{[1 1] [0 1]})))
         (is (= (:body response2) (str #{[1 1] [0 1]})))
         (is (= (:body response3)) (str #{[0 0] [0 1]}))))))
