@@ -1,0 +1,27 @@
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: worldedge
+  labels:
+    run: worldedge
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      run: worldedge
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        run: worldedge
+    spec:
+      containers:
+      - image: tsmarsh/edge
+        name: worldedge
+        env:
+          - name: EDGE_PORT
+            value: "4000"
+        ports:
+        - containerPort: 4000
+
+

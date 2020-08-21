@@ -1,0 +1,22 @@
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  name: ingress
+  annotations:
+    nginx.ingress.kubernetes.io/use-regex: "true"
+spec:
+  rules:
+  - http:
+      paths:
+      - path: /0/0/*
+        backend:
+          serviceName: edge
+          servicePort: 4000
+#      - path: /[0|2]/1/*
+#        backend:
+#          serviceName: edge
+#          servicePort: 80
+      - path: /1/1/*
+        backend:
+          serviceName: chunck
+          servicePort: 3000

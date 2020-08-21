@@ -1,2 +1,4 @@
 bases:
 - ../..
+namespace: ggol-dev
+namePrefix: ggol-dev
