@@ -8,15 +8,15 @@ spec:
   rules:
   - http:
       paths:
-      - path: /0/0/*
+      - path: /[0..2]/[0|2]/*
         backend:
           serviceName: worldedge
           servicePort: 4000
-#      - path: /[0|2]/1/*
-#        backend:
-#          serviceName: edge
-#          servicePort: 80
+      - path: /[0|2]/1/*
+        backend:
+          serviceName: worldedge
+          servicePort: 4000
       - path: /1/1/*
         backend:
-          serviceName: worldchunk
+          serviceName: worldchunck
           servicePort: 3000

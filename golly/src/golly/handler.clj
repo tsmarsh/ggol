@@ -1,10 +1,11 @@
 (ns golly.handler
   (:require
-    [golly.gol :refer :all]
-    [golly.parsers :refer :all]
+    [gollum.gol :refer :all]
+    [gollum.parsers :refer :all]
     [compojure.core :refer :all]
     [compojure.route :as route]
-    [ring.middleware.defaults :refer [wrap-defaults site-defaults]]))
+    [ring.middleware.defaults :refer [wrap-defaults site-defaults]]
+    [ring.logger :as logger]))
 
 (def history (atom []))
 (def world (atom #{}))
@@ -25,6 +26,6 @@
            (route/not-found "#{}"))
 
 (def app
-  (wrap-defaults app-routes (update-in site-defaults [:security :anti-forgery] not)))
+  (logger/wrap-with-logger app-routes (update-in site-defaults [:security :anti-forgery] not)))
 
 
